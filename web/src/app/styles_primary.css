@@ -1,0 +1,428 @@
+/* ============================================================================
+   HARK ORNITHOLOGY — PRIMARY STYLESHEET
+   ----------------------------------------------------------------------------
+   The rules only this site needs. Everything it shares with the rest of
+   felipeharker.org — the tokens, masthead, contents, sections, body copy,
+   tables, definition grids, disclosure rows, controls, references and
+   colophon — is in hark.css beside this file, imported first in
+   src/app/layout.tsx.
+
+   hark.css is generated: `npm run dev` and `npm run build` fetch it from
+   felipeharker.org (its source is web/standards/site/hark.css in hark_web).
+   Do not edit it here. A rule below may read any
+   token hark.css defines, and may add tokens of its own; it should not
+   restyle a class hark.css defines.
+
+   Map styling is not here either — it lives in styles_map.css.
+
+   HOW THIS FILE IS ORGANISED
+      1.  Tokens ................... the colours only this site uses
+      2.  Interior pages ........... headroom under the nav bar
+      3.  Map selection ............ the note under the map once a pin is chosen
+      4.  Scientific names ......... italic mono, wherever a species is named
+      5.  Location index ........... the list of sites and an opened site
+      6.  Media .................... photo grids and the fullscreen lightbox
+      7.  Field notes .............. rendered Markdown trip reports
+      8.  Checklist record ......... the facts under a checklist's masthead
+      9.  Top navigation ........... the bar on interior pages
+     10.  Responsive ............... narrow-screen overrides
+   ========================================================================= */
+
+
+/* ============================================================================
+   1. TOKENS
+   ========================================================================= */
+
+:root {
+  --color-scrim: rgba(20, 19, 18, 0.95);  /* ground behind the lightbox */
+}
+
+
+/* ============================================================================
+   2. INTERIOR PAGES
+   A checklist page sits under the nav bar, so it needs less headroom than
+   the homepage.
+   ========================================================================= */
+
+.doc--interior { padding-top: var(--space-6); }
+
+
+/* ============================================================================
+   3. MAP SELECTION
+   Appears under the map once a pin is chosen. It belongs to the Map section,
+   so it is separated by whitespace and a faint rule, not a section divider.
+   ========================================================================= */
+
+.selected-note {
+  margin-top: var(--space-5);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--color-rule);
+}
+
+.selected-note-title {
+  font-size: var(--size-subsection);
+  font-weight: var(--weight-strong);
+  letter-spacing: var(--track-tight);
+  margin: var(--space-1) 0 var(--space-2);
+}
+
+.selected-note-link { margin: var(--space-3) 0 0; font-size: var(--size-table); }
+
+
+/* ============================================================================
+   4. SCIENTIFIC NAMES
+   Always italic monospace, so a Latin name reads as a recorded value rather
+   than as emphasis.
+   ========================================================================= */
+
+.sci {
+  font-family: var(--font-mono);
+  font-style: italic;
+  font-size: var(--size-fine);
+  color: var(--color-text-mute);
+}
+
+
+/* ============================================================================
+   5. LOCATION INDEX
+   One disclosure row per site (hark.css section 11), opening in place to
+   that site's checklists and species. The row is deliberately the same
+   object as a media row, so the two halves of the document read as one list
+   twice. What is here is what only a location row has.
+   ========================================================================= */
+
+.location-list { margin-top: var(--space-5); }
+
+/* The open row takes the accent, which here means "selected" rather than
+   merely "open": a location is also chosen from the map, and the pin and the
+   row have to agree about which one is current. A media row, which nothing
+   outside it can open, keeps its heading in text colour. */
+.location-list .disclosure[open] > summary .disclosure-title {
+  color: var(--color-accent);
+}
+
+/* -- Checklist links -------------------------------------------------------
+   A checklist entry is a timestamp and a link, so it is a list: timestamp,
+   then link, hairline between. */
+
+.link-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.link-list li {
+  display: grid;
+  grid-template-columns: max-content 1fr;   /* timestamp, then link */
+  align-items: baseline;
+  gap: var(--space-1) var(--space-5);
+  padding: var(--space-3) 0;
+  border-bottom: 1px solid var(--color-rule);
+}
+
+/* The first and last entries sit flush with the row's own padding. */
+.link-list li:first-child { padding-top: 0; }
+.link-list li:last-child { padding-bottom: 0; border-bottom: none; }
+
+.link-list a {
+  font-size: var(--size-table);
+  text-decoration: none;
+}
+
+/* Every entry ends in an arrow, so it reads as a link without an underline;
+   the underline is the hover and keyboard-focus state. */
+.link-list a:hover,
+.link-list a:focus-visible { text-decoration: underline; }
+
+/* -- Nested species table --------------------------------------------------
+   Ruled at the faint weight only, so it reads as part of the open row rather
+   than as a boxed object dropped inside it. */
+
+.table--nested {
+  background: transparent;
+  margin-top: 0;
+}
+
+.table--nested th { border-bottom-color: var(--color-rule); }
+
+.table--nested td { padding: var(--space-2) var(--space-4) var(--space-2) 0; }
+
+.table--nested tbody tr:last-child > td { border-bottom: none; }
+
+
+/* ============================================================================
+   6. MEDIA
+   Photo thumbnails from the Macaulay Library, and the fullscreen viewer.
+   ========================================================================= */
+
+.media-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: var(--space-4);
+}
+
+/* Each thumbnail is a button so it is keyboard-reachable. The border is a
+   hairline that takes the accent on hover; the image itself lifts slightly,
+   which is the only motion on the page. */
+.media-thumb {
+  display: block;
+  width: 100%;
+  padding: 0;
+  overflow: hidden;
+  background: none;
+  border: 1px solid var(--color-rule);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: border-color var(--transition);
+}
+
+.media-thumb:hover { border-color: var(--color-accent); }
+
+.media-thumb:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+.media-thumb img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  transition: transform var(--transition);
+}
+
+.media-thumb:hover img { transform: scale(1.03); }
+
+/* The caption is the species name alone. */
+.media-figcaption {
+  font-size: var(--size-fine);
+  color: var(--color-text-mute);
+  margin-top: var(--space-2);
+  line-height: 1.45;
+}
+
+/* -- Lightbox ------------------------------------------------------------- */
+
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-scrim);
+}
+
+.lightbox-stage {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 1100px;
+  padding: var(--space-4);
+}
+
+.lightbox-stage img {
+  max-width: 100%;
+  max-height: 78vh;
+  object-fit: contain;
+  border-radius: var(--radius-sm);
+}
+
+/* Close / previous / next controls, all on the dark ground. */
+.lightbox-btn {
+  position: absolute;
+  z-index: 51;
+  display: flex;
+  padding: var(--space-2);
+  background: none;
+  border: none;
+  border-radius: var(--radius-sm);
+  color: var(--color-bg);
+  opacity: 0.8;
+  cursor: pointer;
+  transition: opacity var(--transition);
+}
+
+.lightbox-btn:hover { opacity: 1; }
+.lightbox-btn:focus-visible { outline: 2px solid var(--color-bg); outline-offset: 2px; }
+
+.lightbox-btn--close { top: var(--space-4); right: var(--space-4); }
+.lightbox-btn--prev { left: var(--space-4); top: 50%; transform: translateY(-50%); }
+.lightbox-btn--next { right: var(--space-4); top: 50%; transform: translateY(-50%); }
+
+.lightbox-caption {
+  margin-top: var(--space-4);
+  text-align: center;
+  color: var(--color-bg);
+}
+
+.lightbox-caption .name { font-size: var(--size-table); margin: 0; }
+/* .sci is muted-dark by default; on the lightbox's dark ground it inverts. */
+.lightbox-caption .sci { color: inherit; opacity: 0.7; }
+.lightbox-caption .meta {
+  font-family: var(--font-mono);
+  font-size: var(--size-fine);
+  opacity: 0.75;
+  margin: var(--space-2) 0 0;
+}
+.lightbox-caption .index {
+  font-family: var(--font-mono);
+  font-size: var(--size-label);
+  opacity: 0.55;
+  margin: var(--space-1) 0 0;
+}
+
+
+/* ============================================================================
+   7. FIELD NOTES
+   Rendered from Markdown in web/field-notes/. `.note-body` styles the HTML
+   that react-markdown emits, since those elements carry no class names.
+   ========================================================================= */
+
+.note { margin-top: var(--space-6); }
+.note:first-child { margin-top: 0; }
+
+.note-title {
+  font-size: var(--size-subsection);
+  font-weight: var(--weight-strong);
+  letter-spacing: var(--track-tight);
+  margin: 0;
+}
+
+/* Frontmatter fields: date, location, conditions, links. The grid itself is
+   hark.css's `.facts .facts--data`; this closes it off from the note body. */
+.note-meta {
+  border-bottom: 1px solid var(--color-rule);
+  padding-bottom: var(--space-4);
+  margin: var(--space-3) 0 var(--space-4);
+}
+
+.note-meta dd a { margin-right: var(--space-3); word-break: break-word; }
+
+/* -- Rendered Markdown ----------------------------------------------------- */
+
+.note-body {
+  max-width: var(--measure-text);
+  font-size: var(--size-table);
+  color: var(--color-text-soft);
+}
+
+/* Collapse the outer margins so the block's own spacing governs its edges. */
+.note-body > *:first-child { margin-top: 0; }
+.note-body > *:last-child { margin-bottom: 0; }
+
+.note-body p { margin: 0 0 var(--space-3); line-height: 1.7; }
+
+.note-body h1, .note-body h2, .note-body h3, .note-body h4 {
+  font-size: var(--size-table);
+  font-weight: var(--weight-strong);
+  color: var(--color-text);
+  margin: var(--space-5) 0 var(--space-2);
+}
+
+.note-body ul, .note-body ol { margin: 0 0 var(--space-3); padding-left: var(--space-4); }
+.note-body li { margin-bottom: var(--space-1); }
+
+.note-body blockquote {
+  margin: var(--space-4) 0;
+  padding-left: var(--space-4);
+  border-left: 2px solid var(--color-rule-strong);
+  color: var(--color-text-mute);
+}
+
+.note-body table {
+  width: 100%;
+  border-collapse: collapse;
+  /* A step under .note-body's own size: a table inside a note is supporting
+     material, not the note's argument. */
+  font-size: 14px;
+  margin: var(--space-4) 0;
+}
+
+.note-body th, .note-body td {
+  text-align: left;
+  padding: var(--space-2) var(--space-4) var(--space-2) 0;
+  border-bottom: 1px solid var(--color-rule);
+}
+
+.note-body th { font-weight: var(--weight-medium); }
+
+.note-body img { margin: var(--space-4) 0; border-radius: var(--radius-sm); }
+
+.note-body hr {
+  border: none;
+  border-top: 1px solid var(--color-rule);
+  margin: var(--space-5) 0;
+}
+
+
+/* ============================================================================
+   8. CHECKLIST RECORD
+   /checklist/[id] — protocol, effort, observers and comments under the
+   masthead. The grid is hark.css's `.facts .facts--data`; this sets it off
+   from the title block above it.
+   ========================================================================= */
+
+.record {
+  border-top: 1px solid var(--color-rule);
+  padding-top: var(--space-4);
+  margin-top: var(--space-4);
+}
+
+
+/* ============================================================================
+   9. TOP NAVIGATION
+   Shown on interior pages only; the homepage uses its contents list.
+   ========================================================================= */
+
+.nav {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-4);
+  max-width: var(--measure);
+  margin: 0 auto;
+  padding: var(--space-4) var(--doc-pad-x);
+  border-bottom: 1px solid var(--color-rule-strong);
+}
+
+.nav-brand {
+  font-weight: var(--weight-strong);
+  font-size: var(--size-table);
+  letter-spacing: var(--track-tight);
+  color: var(--color-text);
+  text-decoration: none;
+  margin-right: auto;
+  transition: color var(--transition);
+}
+
+.nav-brand:hover { color: var(--color-accent); }
+
+.nav a:not(.nav-brand) {
+  font-size: var(--size-caption);
+  text-decoration: none;
+}
+
+.nav a:not(.nav-brand):hover { text-decoration: underline; }
+
+
+/* ============================================================================
+   10. RESPONSIVE
+   The shared breakpoint, 640px. Type, the page frame, definition grids and
+   tables already respond in hark.css; these are the rules for this site's
+   own components.
+   ========================================================================= */
+
+@media (max-width: 640px) {
+  .doc--interior { padding-top: var(--space-5); }
+
+  .nav { padding: var(--space-3) var(--doc-pad-x); }
+
+  .media-grid { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); }
+
+  /* A checklist entry's timestamp and link stack rather than sharing a line
+     too narrow to hold both. */
+  .link-list li { grid-template-columns: 1fr; }
+}
