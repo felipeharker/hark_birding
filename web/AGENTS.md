@@ -30,11 +30,12 @@ Render publishes `out/`.
 - **Links inside the app are `<Link>`; links out of it are `<a>`.** The site
   links and the standards link are plain `<a>` elements with the absolute
   addresses of the other sites in the family, from `SITE_FAMILY`,
-  `SITE_ROOT` and `STANDARDS_URL` in `src/lib/siteConfig.ts`;
+  `RUNHEAD`, `SITE_ROOT` and `STANDARDS_URL` in `src/lib/siteConfig.ts`;
   `externalLinkProps` keeps them in the same tab.
 - **Every page opens with `<Runhead>` and ends with `<Colophon>`**
   (`src/components/ui/`): both carry the links to every site in the
-  family. The running head is rendered once, by
+  family, and the running head every piece of work too, grouped in menus
+  (`RUNHEAD`). The running head is rendered once, by
   `src/app/layout.tsx`, above each page's `<article>`; the colophon is the
   last thing in each page, with the page's own line.
 - **Observations are never hardcoded; the project's own settings always are.**

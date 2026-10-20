@@ -1,16 +1,19 @@
-import { SITE_FAMILY, SITE_OWNER, SITE_ROOT } from '@/lib/siteConfig';
+import { RUNHEAD, SITE_OWNER, SITE_ROOT, type RunheadLink } from '@/lib/siteConfig';
 
 /**
  * The running head: the line across the top of every page — the owner's
- * name, then a link to every site in felipeharker.org's family, this one
- * bracketed as current. The same links end every page in <Colophon>, so a
- * reader can move between the sites from either end of a page.
+ * name, then every site in felipeharker.org's family and every piece of
+ * work, grouped under Professional, Academic and Birding, each a label and a
+ * menu (RUNHEAD). This report is bracketed as current, and so is the Birding
+ * label holding it. The site links at the foot of every page, in <Colophon>,
+ * lead to the same sites.
  *
  * Every link here leaves the app (or returns to its front), so each is a
- * plain <a>: absolute for the other sites, `/` for this one. Rendered once,
- * by the root layout, outside each page's <article>.
+ * plain <a>: absolute for everything else, `/` for this report. Rendered
+ * once, by the root layout, outside each page's <article>.
  *
- * Styling: section 17 of src/app/hark.css.
+ * Styling: section 17 of src/app/hark.css — the menus drop on hover and
+ * keyboard focus, in CSS alone.
  */
 export function Runhead() {
   return (
@@ -19,16 +22,35 @@ export function Runhead() {
         {SITE_OWNER}
       </a>
       <nav className="runhead-links" aria-label="Site">
-        {SITE_FAMILY.map((site) => (
-          <a
-            key={site.url}
-            href={site.url}
-            aria-current={'current' in site ? 'page' : undefined}
-          >
-            {site.name}
-          </a>
-        ))}
+        <ul>
+          {RUNHEAD.map((item) =>
+            item.menu ? (
+              <li key={item.url} className="runhead-group">
+                <RunheadAnchor link={item} />
+                <ul className="runhead-menu">
+                  {item.menu.map((link) => (
+                    <li key={link.url}>
+                      <RunheadAnchor link={link} />
+                    </li>
+                  ))}
+                </ul>
+              </li>
+            ) : (
+              <li key={item.url}>
+                <RunheadAnchor link={item} />
+              </li>
+            ),
+          )}
+        </ul>
       </nav>
     </header>
+  );
+}
+
+function RunheadAnchor({ link }: { link: RunheadLink }) {
+  return (
+    <a href={link.url} aria-current={link.current ? 'page' : undefined}>
+      {link.name}
+    </a>
   );
 }

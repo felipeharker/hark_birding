@@ -32,7 +32,7 @@ export const ABSTRACT =
  * Off-site addresses used in more than one place — the repository URL alone
  * appears in the reference list and the colophon. The Dove Habitat site, a
  * project site with its own tile on the portfolio, is linked from the
- * reference list and nowhere else here.
+ * reference list and the running head's Birding menu (RUNHEAD).
  */
 export const SITE_LINKS = {
   repository: 'https://github.com/felipeharker/hark_birding',
@@ -45,10 +45,10 @@ export const SITE_LINKS = {
 
 /**
  * Every site in felipeharker.org's family, in the order of FAMILY in
- * tools/site.mjs, for the running head at the top of each page (Runhead) and
- * the site links at its foot (Colophon). This report is the root of its own
- * site, so its own link is `/`; the others are absolute, written as plain
- * <a> elements, and open in the same tab. `current` marks this one.
+ * tools/site.mjs, for the site links at the foot of each page (Colophon).
+ * This report is the root of its own site, so its own link is `/`; the
+ * others are absolute, written as plain <a> elements, and open in the same
+ * tab. `current` marks this one.
  */
 export const SITE_FAMILY = [
   { name: 'Portfolio', url: 'https://felipeharker.org/' },
@@ -56,6 +56,58 @@ export const SITE_FAMILY = [
   { name: 'Birding', url: '/', current: true },
   { name: 'Resume', url: 'https://hark-resume.onrender.com/' },
 ] as const;
+
+/** A link in the running head; `current` marks the page the reader is on. */
+export type RunheadLink = { name: string; url: string; current?: boolean };
+
+/** A site in the running head, or a group: a label and the menu of its work. */
+export type RunheadItem = RunheadLink & { menu?: readonly RunheadLink[] };
+
+/**
+ * The running head at the top of each page (Runhead): every site in the
+ * family and every piece of work, as on every page of every site in it
+ * (hark_web, web/standards/docs/components.md, "Running head"). A group's
+ * label leads to where its work is listed — Academic to the academic site,
+ * Professional and Birding to their rows of the portfolio. This report is
+ * the root of its own site, so its own link is `/`; every other link is
+ * absolute, a plain <a>, in the same tab. A new piece of work goes in its
+ * group here and on every other site's pages at once.
+ */
+export const RUNHEAD: readonly RunheadItem[] = [
+  { name: 'Portfolio', url: 'https://felipeharker.org/' },
+  {
+    name: 'Professional',
+    url: 'https://felipeharker.org/#work-professional',
+    menu: [{ name: 'Parametric Living', url: 'https://parametric-living.onrender.com/' }],
+  },
+  {
+    name: 'Academic',
+    url: 'https://hark-academic.onrender.com/',
+    menu: [
+      {
+        name: 'Living Outside the Box',
+        url: 'https://hark-academic.onrender.com/projects/living-outside-the-box.html',
+      },
+      {
+        name: 'Dead Mall Fall',
+        url: 'https://hark-academic.onrender.com/projects/dead-mall-fall.html',
+      },
+      {
+        name: 'Collingsworth Marketplace',
+        url: 'https://hark-academic.onrender.com/projects/collingsworth-marketplace.html',
+      },
+    ],
+  },
+  {
+    name: 'Birding',
+    url: 'https://felipeharker.org/#work-birding',
+    menu: [
+      { name: 'Ornithology Report', url: '/', current: true },
+      { name: 'Dove Habitat', url: SITE_LINKS.doveHabitat },
+    ],
+  },
+  { name: 'Resume', url: 'https://hark-resume.onrender.com/' },
+];
 
 /** The name that leads the site links. */
 export const SITE_OWNER = 'Felipe E. Harker';

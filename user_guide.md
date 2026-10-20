@@ -185,13 +185,19 @@ the text between the quotes and save.
 - **`SITE_LINKS`** — the repository, eBird profile, Macaulay Library and Merlin
   URLs, and the Dove Habitat site. Each is written once here and used in
   several places, so the navigation bar, the reference list and the colophon
-  can never disagree. The Dove Habitat link is in the reference list only;
-  the site is a project of its own, with a tile on the portfolio.
+  can never disagree. The Dove Habitat link is in the reference list and the
+  running head's Birding menu; the site is a project of its own, with a tile
+  on the portfolio.
 - **`SITE_FAMILY`** — the site links at the foot of every page: the
-  portfolio, the academic projects, this report and the resume, also used by
-  the running head. This report's own link is `/`; the others are absolute
-  addresses, and plain links, not Next links. Links to them open in the same
-  tab; links anywhere else open a new one.
+  portfolio, the academic projects, this report and the resume. This
+  report's own link is `/`; the others are absolute addresses, and plain
+  links, not Next links. Links to them open in the same tab; links anywhere
+  else open a new one.
+- **`RUNHEAD`** — the running head at the top of every page: Portfolio, then
+  Professional, Academic and Birding, each a label over a menu of its work,
+  then Resume — the same list as on every other site in the family. Every
+  link in it opens in the same tab. A new project on the portfolio goes in
+  its menu here too.
 - **`STANDARDS_URL`** — `https://felipeharker.org/standards/`, linked from the colophon and the
   Reference section.
 
