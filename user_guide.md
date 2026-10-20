@@ -185,8 +185,8 @@ the text between the quotes and save.
 - **`SITE_LINKS`** — the repository, eBird profile, Macaulay Library and Merlin
   URLs, and the Dove Habitat site. Each is written once here and used in
   several places, so the navigation bar, the reference list and the colophon
-  can never disagree. The Dove Habitat link is in the reference list only: it
-  is the one link to that site from felipeharker.org's family.
+  can never disagree. The Dove Habitat link is in the reference list only;
+  the site is a project of its own, with a tile on the portfolio.
 - **`SITE_FAMILY`** — the site links at the foot of every page: the
   portfolio, the academic projects, this report and the resume, also used by
   the running head. This report's own link is `/`; the others are absolute
