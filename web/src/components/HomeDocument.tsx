@@ -100,6 +100,11 @@ const REFERENCES = [
     href: SITE_LINKS.merlin,
     desc: 'State-of-the-art visual and audio bird identification mobile app. Invaluable resource for any birder.',
   },
+  {
+    label: 'Dove Habitat',
+    href: SITE_LINKS.doveHabitat,
+    desc: 'Design documentation for a modular system of 3D-printed perches, feeders and shelters for a wire corner cage.',
+  },
 ];
 
 function HomeDocumentInner({ data, mediaData, fieldNotes }: HomeDocumentProps) {
@@ -295,7 +300,7 @@ function HomeDocumentInner({ data, mediaData, fieldNotes }: HomeDocumentProps) {
       <hr className="rule-soft" />
 
       {/* -- Contents ------------------------------------------------------- */}
-      <nav aria-label="Contents">
+      <nav className="contents" aria-label="Contents">
         <p className="toc-label">Contents</p>
         <ul className="toc">
           {SECTIONS.map((s) => (

@@ -37,15 +37,15 @@
    ========================================================================= */
 
 :root {
-  --map-height: 460px;                             /* frame height on desktop */
+  --map-height: 540px;                             /* frame height on desktop */
   --map-height-small: 300px;                       /* … and on narrow screens */
   --map-border: 1px solid var(--color-rule);       /* frame around the canvas */
-  --map-radius: var(--radius-md);                  /* matches panels and inputs */
+  --map-radius: var(--radius-md);                  /* square, like every frame */
 
   --map-pin-size: 24px;                            /* pin height at rest */
   --map-pin-scale-selected: 1.3;                   /* growth factor when picked */
-  --map-pin-color: var(--color-accent);            /* unselected pin */
-  --map-pin-color-selected: var(--color-text);     /* selected pin */
+  --map-pin-color: var(--color-text-mute);         /* unselected pin */
+  --map-pin-color-selected: var(--color-accent);   /* selected pin */
   --map-pin-opacity-hover: 0.75;
 
   --map-control-bg: var(--color-bg);
@@ -67,7 +67,14 @@
   height: var(--map-height);
   border: var(--map-border);
   border-radius: var(--map-radius);
-  overflow: hidden;   /* clips the canvas to the frame's rounded corners */
+  overflow: hidden;   /* clips the canvas to the frame */
+}
+
+/* The map leads its section, so it takes the whole width of the page on a
+   row of its own under the section's label (hark.css section 6). */
+.section > .map-frame {
+  grid-column: full;
+  margin-top: var(--space-5);
 }
 
 /* react-map-gl renders its own wrapper div inside; make it fill the frame. */
@@ -102,7 +109,8 @@
   outline-offset: 2px;
 }
 
-/* The selected pin darkens, grows, and lifts above its neighbours. */
+/* The selected pin turns from grey to ink, grows, and lifts above its
+   neighbours. */
 .map-pin[data-selected='true'] {
   color: var(--map-pin-color-selected);
   transform: scale(var(--map-pin-scale-selected));
@@ -159,6 +167,11 @@
 /* ============================================================================
    5. RESPONSIVE
    ========================================================================= */
+
+@media (max-width: 860px) {
+  /* The section's label now sits above the map, with room of its own. */
+  .section > .map-frame { margin-top: 0; }
+}
 
 @media (max-width: 640px) {
   .map-frame { height: var(--map-height-small); }

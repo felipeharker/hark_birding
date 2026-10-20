@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
-import { Inter, IBM_Plex_Mono } from 'next/font/google';
 import { SITE_TITLE, SITE_DESCRIPTION } from '@/lib/siteConfig';
+import { Runhead } from '@/components/ui/Runhead';
 
 // The shared standard first — hark.css is generated: `npm run dev` and
 // `npm run build` fetch it from https://felipeharker.org/standards/hark.css
@@ -12,37 +12,15 @@ import './styles_primary.css';
 import './styles_map.css';
 
 /**
- * The two faces the design uses.
- *
- * Inter carries everything a reader reads: headings, prose, tables, labels.
- * It is a neutral, low-contrast grotesque that stays legible at small sizes
- * and — unlike the serif this site used before — does not need to be set
- * large or bold to hold a heading together. Only three weights are loaded;
- * the design never asks for a fourth, and every extra weight is a font file
- * the visitor has to download.
- *
- * IBM Plex Mono is reserved for recorded values: dates, times, counts,
- * coordinates, scientific names. Its job is column alignment and signalling
- * "this is data, not a sentence" — not decoration, so it is deliberately
- * scarce.
- *
- * Both are exposed as CSS variables and consumed by --font-body / --font-mono
- * in hark.css. next/font self-hosts the files at build time, so
- * there is no request to Google at runtime and no flash of unstyled text.
+ * The two faces the design uses, Inter and IBM Plex Mono, load from Google
+ * Fonts with the same <link> every static page on felipeharker.org has (plus
+ * the italics, for scientific names). The browser fetches them, not the
+ * build: the build downloads nothing, so a deploy cannot fail on a font.
+ * hark.css names the families in --font-body and --font-mono.
  */
-const inter = Inter({
-  subsets: ['latin'],
-  weight: ['400', '500', '600'],
-  style: ['normal', 'italic'],
-  variable: '--font-sans',
-});
-
-const plexMono = IBM_Plex_Mono({
-  subsets: ['latin'],
-  weight: ['400', '500'],
-  style: ['normal', 'italic'],
-  variable: '--font-mono-face',
-});
+const FONTS_URL =
+  'https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;1,400' +
+  '&family=IBM+Plex+Mono:ital,wght@0,400;0,500;1,400&display=swap';
 
 export const metadata: Metadata = {
   title: SITE_TITLE,
@@ -53,18 +31,18 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    /* The font variable classes go on <html>, not <body>, and that placement
-       is load-bearing. next/font emits a class that declares --font-sans and
-       --font-mono-face on whatever element carries it, while hark.css
-       composes --font-body from them inside its :root block — which *is*
-       <html>. A custom property is substituted against the element it is
-       declared on, so a --font-body built in :root out of variables that only
-       exist further down the tree resolves to nothing at all: the declaration
-       becomes invalid and every page silently falls back to the browser's
-       default serif. Keeping the classes here means the variables and the
-       token that consumes them live on the same element. */
-    <html lang="en" className={`${inter.variable} ${plexMono.variable}`}>
-      <body>{children}</body>
+    <html lang="en">
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="stylesheet" href={FONTS_URL} />
+      </head>
+      {/* The running head is the same on every page, so it is rendered here,
+          above each page's <article>, rather than by each page. */}
+      <body>
+        <Runhead />
+        {children}
+      </body>
     </html>
   );
 }

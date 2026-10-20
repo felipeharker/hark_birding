@@ -17,15 +17,16 @@
 
    HOW THIS FILE IS ORGANISED
       1.  Tokens ................... the colours only this site uses
-      2.  Interior pages ........... headroom under the nav bar
-      3.  Map selection ............ the note under the map once a pin is chosen
-      4.  Scientific names ......... italic mono, wherever a species is named
-      5.  Location index ........... the list of sites and an opened site
-      6.  Media .................... photo grids and the fullscreen lightbox
-      7.  Field notes .............. rendered Markdown trip reports
-      8.  Checklist record ......... the facts under a checklist's masthead
-      9.  Top navigation ........... the bar on interior pages
-     10.  Responsive ............... narrow-screen overrides
+      2.  Map selection ............ the note under the map once a pin is chosen
+      3.  Scientific names ......... italic mono, wherever a species is named
+      4.  Location index ........... the list of sites and an opened site
+      5.  Media .................... photo grids and the fullscreen lightbox
+      6.  Field notes .............. rendered Markdown trip reports
+      7.  Checklist record ......... the facts under a checklist's masthead
+      8.  Responsive ............... narrow-screen overrides
+
+   The bar across the top of every page is the shared running head
+   (hark.css section 17), rendered once by src/app/layout.tsx.
    ========================================================================= */
 
 
@@ -39,16 +40,7 @@
 
 
 /* ============================================================================
-   2. INTERIOR PAGES
-   A checklist page sits under the nav bar, so it needs less headroom than
-   the homepage.
-   ========================================================================= */
-
-.doc--interior { padding-top: var(--space-6); }
-
-
-/* ============================================================================
-   3. MAP SELECTION
+   2. MAP SELECTION
    Appears under the map once a pin is chosen. It belongs to the Map section,
    so it is separated by whitespace and a faint rule, not a section divider.
    ========================================================================= */
@@ -61,7 +53,7 @@
 
 .selected-note-title {
   font-size: var(--size-subsection);
-  font-weight: var(--weight-strong);
+  font-weight: var(--weight-medium);
   letter-spacing: var(--track-tight);
   margin: var(--space-1) 0 var(--space-2);
 }
@@ -70,7 +62,7 @@
 
 
 /* ============================================================================
-   4. SCIENTIFIC NAMES
+   3. SCIENTIFIC NAMES
    Always italic monospace, so a Latin name reads as a recorded value rather
    than as emphasis.
    ========================================================================= */
@@ -84,7 +76,7 @@
 
 
 /* ============================================================================
-   5. LOCATION INDEX
+   4. LOCATION INDEX
    One disclosure row per site (hark.css section 11), opening in place to
    that site's checklists and species. The row is deliberately the same
    object as a media row, so the two halves of the document read as one list
@@ -93,12 +85,14 @@
 
 .location-list { margin-top: var(--space-5); }
 
-/* The open row takes the accent, which here means "selected" rather than
-   merely "open": a location is also chosen from the map, and the pin and the
-   row have to agree about which one is current. A media row, which nothing
-   outside it can open, keeps its heading in text colour. */
+/* The open row's title takes the accent and the medium weight, which here
+   mean "selected" rather than merely "open": a location is also chosen from
+   the map, and the pin and the row have to agree about which one is
+   current. A media row, which nothing outside it can open, keeps its title
+   as it is. */
 .location-list .disclosure[open] > summary .disclosure-title {
   color: var(--color-accent);
+  font-weight: var(--weight-medium);
 }
 
 /* -- Checklist links -------------------------------------------------------
@@ -151,7 +145,7 @@
 
 
 /* ============================================================================
-   6. MEDIA
+   5. MEDIA
    Photo thumbnails from the Macaulay Library, and the fullscreen viewer.
    ========================================================================= */
 
@@ -277,7 +271,7 @@
 
 
 /* ============================================================================
-   7. FIELD NOTES
+   6. FIELD NOTES
    Rendered from Markdown in web/field-notes/. `.note-body` styles the HTML
    that react-markdown emits, since those elements carry no class names.
    ========================================================================= */
@@ -287,7 +281,7 @@
 
 .note-title {
   font-size: var(--size-subsection);
-  font-weight: var(--weight-strong);
+  font-weight: var(--weight-medium);
   letter-spacing: var(--track-tight);
   margin: 0;
 }
@@ -360,7 +354,7 @@
 
 
 /* ============================================================================
-   8. CHECKLIST RECORD
+   7. CHECKLIST RECORD
    /checklist/[id] — protocol, effort, observers and comments under the
    masthead. The grid is hark.css's `.facts .facts--data`; this sets it off
    from the title block above it.
@@ -374,52 +368,13 @@
 
 
 /* ============================================================================
-   9. TOP NAVIGATION
-   Shown on interior pages only; the homepage uses its contents list.
-   ========================================================================= */
-
-.nav {
-  display: flex;
-  align-items: baseline;
-  gap: var(--space-4);
-  max-width: var(--measure);
-  margin: 0 auto;
-  padding: var(--space-4) var(--doc-pad-x);
-  border-bottom: 1px solid var(--color-rule-strong);
-}
-
-.nav-brand {
-  font-weight: var(--weight-strong);
-  font-size: var(--size-table);
-  letter-spacing: var(--track-tight);
-  color: var(--color-text);
-  text-decoration: none;
-  margin-right: auto;
-  transition: color var(--transition);
-}
-
-.nav-brand:hover { color: var(--color-accent); }
-
-.nav a:not(.nav-brand) {
-  font-size: var(--size-caption);
-  text-decoration: none;
-}
-
-.nav a:not(.nav-brand):hover { text-decoration: underline; }
-
-
-/* ============================================================================
-   10. RESPONSIVE
+   8. RESPONSIVE
    The shared breakpoint, 640px. Type, the page frame, definition grids and
    tables already respond in hark.css; these are the rules for this site's
    own components.
    ========================================================================= */
 
 @media (max-width: 640px) {
-  .doc--interior { padding-top: var(--space-5); }
-
-  .nav { padding: var(--space-3) var(--doc-pad-x); }
-
   .media-grid { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); }
 
   /* A checklist entry's timestamp and link stack rather than sharing a line

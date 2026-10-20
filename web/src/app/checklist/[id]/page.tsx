@@ -4,7 +4,6 @@ import { getObservations, getMedia } from '@/lib/parseEbird';
 import { formatDate } from '@/lib/formatDate';
 import { SITE_TITLE } from '@/lib/siteConfig';
 import ChecklistDocument from '@/components/ChecklistDocument';
-import { Nav } from '@/components/ui/Nav';
 import { Masthead } from '@/components/ui/Masthead';
 import { Colophon } from '@/components/ui/Colophon';
 
@@ -43,18 +42,15 @@ export default async function ChecklistPage({ params }: { params: Promise<{ id: 
 
   if (checklistData.length === 0) {
     return (
-      <>
-        <Nav />
-        <article className="doc doc--interior">
-          <Masthead align="left" kicker="Not Found" title="Checklist Not Found" />
-          <p className="body-text">
-            The checklist ID {submissionId} could not be found in the dataset.
-          </p>
-          <p className="body-text">
-            <Link href="/">← Return to the report</Link>
-          </p>
-        </article>
-      </>
+      <article className="doc">
+        <Masthead record kicker="Not Found" title="Checklist Not Found" />
+        <p className="body-text">
+          The checklist ID {submissionId} could not be found in the dataset.
+        </p>
+        <p className="body-text">
+          <Link href="/">← Return to the report</Link>
+        </p>
+      </article>
     );
   }
 
@@ -69,54 +65,51 @@ export default async function ChecklistPage({ params }: { params: Promise<{ id: 
   ].filter(Boolean).join(' · ');
 
   return (
-    <>
-      <Nav />
-      <article className="doc doc--interior">
-        <Link href={`/?locationId=${meta.LocationID}`} className="backlink">
-          ← Back to the location index
-        </Link>
+    <article className="doc">
+      <Link href={`/?locationId=${meta.LocationID}`} className="backlink">
+        ← Back to the location index
+      </Link>
 
-        <Masthead
-          align="left"
-          kicker="Checklist Report"
-          title={meta.Location}
-          dateline={`${place} · ${formatDate(meta.Date)} · ${meta.Time}`}
-        >
-          <dl className="facts facts--data record">
-            <dt>Protocol</dt>
-            <dd>{meta.Protocol}</dd>
-            {effort && (
-              <>
-                <dt>Effort</dt>
-                <dd>{effort}</dd>
-              </>
-            )}
-            <dt>Observers</dt>
-            <dd>{meta.NumberOfObservers}</dd>
-            {incomplete && (
-              <>
-                <dt>Status</dt>
-                <dd>
-                  <span className="tag">Incomplete</span>
-                </dd>
-              </>
-            )}
-            {meta.ChecklistComments && (
-              <>
-                <dt>Comments</dt>
-                <dd>{meta.ChecklistComments}</dd>
-              </>
-            )}
-          </dl>
-        </Masthead>
+      <Masthead
+        record
+        kicker="Checklist Report"
+        title={meta.Location}
+        dateline={`${place} · ${formatDate(meta.Date)} · ${meta.Time}`}
+      >
+        <dl className="facts facts--data record">
+          <dt>Protocol</dt>
+          <dd>{meta.Protocol}</dd>
+          {effort && (
+            <>
+              <dt>Effort</dt>
+              <dd>{effort}</dd>
+            </>
+          )}
+          <dt>Observers</dt>
+          <dd>{meta.NumberOfObservers}</dd>
+          {incomplete && (
+            <>
+              <dt>Status</dt>
+              <dd>
+                <span className="tag">Incomplete</span>
+              </dd>
+            </>
+          )}
+          {meta.ChecklistComments && (
+            <>
+              <dt>Comments</dt>
+              <dd>{meta.ChecklistComments}</dd>
+            </>
+          )}
+        </dl>
+      </Masthead>
 
-        <ChecklistDocument species={checklistData} media={checklistMedia} />
+      <ChecklistDocument species={checklistData} media={checklistMedia} />
 
-        <Colophon>
-          Submission {submissionId} · recorded on eBird, rendered from the export in
-          observation-data/.
-        </Colophon>
-      </article>
-    </>
+      <Colophon>
+        Submission {submissionId} · recorded on eBird, rendered from the export in
+        observation-data/.
+      </Colophon>
+    </article>
   );
 }

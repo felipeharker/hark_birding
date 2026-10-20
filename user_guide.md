@@ -133,7 +133,7 @@ terms of them, so changing a token restyles every site consistently:
 | `--color-text`, `--color-text-soft`, `--color-text-mute` | Body copy, secondary prose, captions and labels. |
 | `--color-accent` | Links, map pins, the open location row's name, Show / Hide hints. The hover shade and the faint selected-row wash are both derived from it, so changing this one value re-accents the site. |
 | `--color-rule-strong`, `--color-rule` | The two divider tints. Both are 1px hairlines; they differ in contrast, not thickness. |
-| `--font-body`, `--font-mono` | The sans and monospace faces. To change a family, edit the `next/font` imports in `web/src/app/layout.tsx` too. |
+| `--font-body`, `--font-mono` | The sans and monospace faces. To change a family, edit the Google Fonts link in `web/src/app/layout.tsx` and in every static page too. |
 | `--weight-regular`, `--weight-medium`, `--weight-strong` | 400 / 500 / 600. Nothing on the site is set bolder than 600. |
 | `--size-*` | The type scale: title, section, body, table, data, caption, label. |
 | `--track-*` | Letter-spacing: tight for headings, slightly tight for prose, open for uppercase labels. |
@@ -183,13 +183,15 @@ the text between the quotes and save.
   read.
 - **`ABSTRACT`** — the summary paragraph on the homepage (§2).
 - **`SITE_LINKS`** — the repository, eBird profile, Macaulay Library and Merlin
-  URLs. Each is written once here and used in several places, so the navigation
-  bar, the reference list and the colophon can never disagree.
+  URLs, and the Dove Habitat site. Each is written once here and used in
+  several places, so the navigation bar, the reference list and the colophon
+  can never disagree. The Dove Habitat link is in the reference list only: it
+  is the one link to that site from felipeharker.org's family.
 - **`SITE_FAMILY`** — the site links at the foot of every page: the
-  portfolio, the academic projects, this report and the resume. This report's
-  own link is `/`; the others are absolute addresses, and plain links, not
-  Next links. Links to them open in the same tab; links anywhere else open a
-  new one.
+  portfolio, the academic projects, this report and the resume, also used by
+  the running head. This report's own link is `/`; the others are absolute
+  addresses, and plain links, not Next links. Links to them open in the same
+  tab; links anywhere else open a new one.
 - **`STANDARDS_URL`** — `https://felipeharker.org/standards/`, linked from the colophon and the
   Reference section.
 
@@ -220,8 +222,9 @@ by the build instead of silently falling back to a default.
   `<Section>` for a plain block, `<Disclosure>` for a row inside one that
   collapses. Use these rather than writing the heading markup by hand, so every
   page stays consistent.
-- **Off-site URLs** (the repository, the eBird profile, Macaulay, Merlin) live
-  in `web/src/lib/siteConfig.ts`, so each is written once.
+- **Off-site URLs** (the repository, the eBird profile, Macaulay, Merlin, the
+  Dove Habitat site) live in `web/src/lib/siteConfig.ts`, so each is written
+  once.
 
 ## 7. Collapsible rows
 

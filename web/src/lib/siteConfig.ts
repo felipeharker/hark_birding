@@ -9,7 +9,7 @@
  * edit, so they live here instead of in a CSV nobody remembers to look at.
  */
 
-/** Browser tab, masthead, and the nav brand on interior pages. */
+/** Browser tab and masthead. */
 export const SITE_TITLE = 'Harker Ornithology Report';
 
 /** Sits under the title on the homepage. */
@@ -30,7 +30,8 @@ export const ABSTRACT =
 
 /**
  * Off-site addresses used in more than one place — the repository URL alone
- * appears in the navigation bar, the reference list and the colophon.
+ * appears in the reference list and the colophon. The Dove Habitat site is
+ * linked from the reference list and nowhere else in felipeharker.org's family.
  */
 export const SITE_LINKS = {
   repository: 'https://github.com/felipeharker/hark_birding',
@@ -38,13 +39,15 @@ export const SITE_LINKS = {
   macaulayLibrary:
     'https://media.ebird.org/catalog?unconfirmed=incl&mediaType=photo&userId=USER8148095',
   merlin: 'https://merlin.allaboutbirds.org/',
+  doveHabitat: 'https://dove-habitat.onrender.com/',
 } as const;
 
 /**
  * Every site in felipeharker.org's family, in the order of FAMILY in
- * tools/site.mjs, for the site links at the foot of each page (Colophon).
- * This report is the root of its own site, so its own link is `/`; the
- * others are absolute, and open in the same tab. `current` marks this one.
+ * tools/site.mjs, for the running head at the top of each page (Runhead) and
+ * the site links at its foot (Colophon). This report is the root of its own
+ * site, so its own link is `/`; the others are absolute, written as plain
+ * <a> elements, and open in the same tab. `current` marks this one.
  */
 export const SITE_FAMILY = [
   { name: 'Portfolio', url: 'https://felipeharker.org/' },
@@ -56,12 +59,19 @@ export const SITE_FAMILY = [
 /** The name that leads the site links. */
 export const SITE_OWNER = 'Felipe E. Harker';
 
+/**
+ * The front page of felipeharker.org — the portfolio — which the owner's name
+ * in the running head links to. Outside this app, so it is written as a plain
+ * <a>, never a <Link>.
+ */
+export const SITE_ROOT = 'https://felipeharker.org/';
+
 /** The design standard every site in the family follows, served by hark_web. */
 export const STANDARDS_URL = 'https://felipeharker.org/standards/';
 
 /** The sites a link opens in the same tab from: the rest of the family. */
 const FAMILY_ORIGINS = new Set(
-  [...SITE_FAMILY.map((site) => site.url), STANDARDS_URL]
+  [...SITE_FAMILY.map((site) => site.url), SITE_ROOT, STANDARDS_URL]
     .filter((url) => url.startsWith('http'))
     .map((url) => new URL(url).origin),
 );

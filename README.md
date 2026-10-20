@@ -44,7 +44,7 @@ coding agents, after [`AGENTS.md`](AGENTS.md).
 | `observation-data/ebird-data-latest.csv` | Map pins, the location index, species tables, and one page per checklist. |
 | `observation-data/ebird-media-latest.csv` | The Media section and the photo lightboxes. |
 | `web/field-notes/field-note-*.md` | The Field Notes section. |
-| `web/src/lib/siteConfig.ts` | Site title, subtitle, byline, the abstract, the off-site links, and the links to the rest of the family. |
+| `web/src/lib/siteConfig.ts` | Site title, subtitle, byline, the abstract, the off-site links (the Dove Habitat site among them), and the links to the rest of the family. |
 
 Observations are never written into markup — a change to a bird, a place or a
 count is a change to a CSV. The project's own settings are the exception, and
@@ -101,11 +101,11 @@ web/
     hark.css               the shared standard — generated, git-ignored
     styles_primary.css     this site's own components, commented throughout
     styles_map.css         all map styling (frame, pins, MapLibre chrome)
-    layout.tsx             fonts and metadata
+    layout.tsx             fonts, metadata and the running head
     page.tsx               reads every content source, hands it to HomeDocument
     checklist/[id]/        one static page per submitted checklist
   src/components/        HomeDocument, ChecklistDocument, Map, ImageLightbox
-    ui/                    shared primitives: Section, Masthead, Colophon, MediaGrid, Nav, Icons
+    ui/                    shared primitives: Runhead, Section, Masthead, Colophon, MediaGrid, Icons
   src/lib/
     parseEbird.ts          reads both eBird CSVs (server only — it touches the filesystem)
     parseFieldNotes.ts     reads field-notes/*.md
@@ -116,10 +116,10 @@ web/
 ## Design
 
 The report shares one visual language with every site in the family: Inter
-for headings and prose, IBM Plex Mono reserved for recorded data, hairline
-rules and whitespace instead of heavy bars and boxes, three type weights and
-no bold, and one deep-red accent that only ever means "interactive or
-selected". Nothing is numbered.
+for headings and prose, IBM Plex Mono reserved for recorded data, a grid of
+two columns with bracketed labels on the left, a very large title, hairline
+rules and whitespace instead of boxes, no bold and no colour — the accent
+that means "interactive or selected" is ink. Nothing is numbered.
 
 The standard lives in `hark_web` (`web/standards/`) and is rendered at
 https://felipeharker.org/standards/. Before every dev server, build and lint,
