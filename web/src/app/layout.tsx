@@ -33,9 +33,22 @@ const FONTS_URL =
  */
 const SCRIPT_URL = 'https://felipeharker.org/standards/hark.js';
 
+/**
+ * The standard's favicon, a bracketed H, served beside hark.css; hark.js
+ * swaps the SVG for the serif letter for a reader who chose the serif.
+ */
+const ICONS = 'https://felipeharker.org/standards/';
+
 export const metadata: Metadata = {
   title: SITE_TITLE,
   description: SITE_DESCRIPTION,
+  icons: {
+    icon: [
+      { url: `${ICONS}favicon.png`, sizes: '32x32' },
+      { url: `${ICONS}favicon.svg`, type: 'image/svg+xml' },
+    ],
+    apple: `${ICONS}apple-touch-icon.png`,
+  },
   openGraph: { title: SITE_TITLE, description: SITE_DESCRIPTION, type: 'website' },
   twitter: { card: 'summary', title: SITE_TITLE, description: SITE_DESCRIPTION },
 };

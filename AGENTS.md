@@ -22,17 +22,18 @@ decision log and the roadmap for all four live in
 4. **No links to private `github.com/felipeharker/…` repositories.** A
    visitor gets GitHub's 404. The four public ones — `hark_web`,
    `hark_academic`, `hark_birding`, `hark_resume` — may be linked.
-5. **One stylesheet, and it is not here.** The app imports the shared
-   standard from `src/app/hark.css`, which `web/scripts/standard.mjs` fetches
-   from https://felipeharker.org/standards/hark.css and git ignores. Never
-   edit or commit that copy; a change to a shared component is a change to
-   the standard, in `hark_web`. This app's own rules go in
-   `styles_primary.css` and `styles_map.css`, commented. The standard's one
-   script, https://felipeharker.org/standards/hark.js, is linked by
-   `src/app/layout.tsx` in the `<head>`, not deferred: it sets the page in
-   the design — sans or serif — the reader chose on felipeharker.org's front
-   page. There is no switch here; the front page is the only place to
-   choose.
+5. **One stylesheet, and it is not here.** The app imports the shared standard
+   from `src/app/hark.css`, which `web/scripts/standard.mjs` fetches from
+   https://felipeharker.org/standards/hark.css and git ignores. Never edit or
+   commit that copy; a change to a shared component is a change to the
+   standard, in `hark_web`. This app's own rules go in `styles_primary.css`
+   and `styles_map.css`, commented. The standard's one script,
+   https://felipeharker.org/standards/hark.js, is linked by
+   `src/app/layout.tsx` in the `<head>`, not deferred: it sets the page in the
+   design — sans or serif — and accent — ink, red or blue — the reader chose
+   on felipeharker.org's front page. Every page links the standard's favicon
+   too, `https://felipeharker.org/standards/favicon.svg`. There is no switch
+   here; the front page is the only place to choose.
 6. **Links.** Within the app: Next `<Link>`. To another site in the family:
    a plain `<a>` with the absolute address from `SITE_FAMILY` /
    `STANDARDS_URL`, same tab. To anyone else: spread `externalLinkProps(href)`
