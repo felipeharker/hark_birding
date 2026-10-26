@@ -131,6 +131,13 @@ never edit that copy. To try an undeployed change to the standard, point
 not hunting through rules. There is no CSS framework and no inline style
 objects.
 
+The standard has two designs, sans and serif, and the reader picks one on
+felipeharker.org's front page. Every page here links the standard's one
+script, https://felipeharker.org/standards/hark.js, in its `<head>`
+(`web/src/app/layout.tsx`); it sets the page in the chosen design before it
+is drawn. The serif design's rules are in `hark.css`, so the report shows
+them from its next build after `hark_web` deploys.
+
 ## Deploying
 
 A Render static site, `hark-birding`, deployed from `main` on every push:

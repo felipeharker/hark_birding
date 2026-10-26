@@ -19,6 +19,13 @@ Render publishes `out/`.
   ignores it. Never edit it here: a change to a token or a shared component
   (masthead, sections, tables, disclosures, references, colophon) is made in
   the standard, in `hark_web`.
+- **The standard's one script is linked, not copied.** `src/app/layout.tsx`
+  renders `<script src="https://felipeharker.org/standards/hark.js">` in the
+  `<head>`, a plain synchronous script (with the lint rule against those
+  turned off on its line, and `suppressHydrationWarning` on `<html>`): it sets
+  `<html data-design>` to the design the reader chose on felipeharker.org's
+  front page before the first paint. Keep it there; do not move it to
+  `next/script`.
 - **This site's own styling lives in `src/app/styles_primary.css` and
   `src/app/styles_map.css`**, loaded after `hark.css`. Do not add inline style
   objects, and do not reintroduce Tailwind or any other CSS framework. Add a

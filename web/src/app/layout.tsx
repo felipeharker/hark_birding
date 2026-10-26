@@ -22,6 +22,17 @@ const FONTS_URL =
   'https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;1,400' +
   '&family=IBM+Plex+Mono:ital,wght@0,400;0,500;1,400&display=swap';
 
+/**
+ * The standard's one script, served beside hark.css; its source is
+ * web/standards/site/hark.js in hark_web. It sets <html data-design> to the
+ * design the reader chose on felipeharker.org's front page — sans or serif —
+ * and loads Source Serif 4 when it is wanted, so it has to run before the
+ * page is drawn: a plain <script> in the <head>, not next/script, whose
+ * strategies run it later. Because it sets an attribute on <html> before
+ * React hydrates, <html> carries suppressHydrationWarning.
+ */
+const SCRIPT_URL = 'https://felipeharker.org/standards/hark.js';
+
 export const metadata: Metadata = {
   title: SITE_TITLE,
   description: SITE_DESCRIPTION,
@@ -31,11 +42,13 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="stylesheet" href={FONTS_URL} />
+        {/* eslint-disable-next-line @next/next/no-sync-scripts -- it must run before the first paint (SCRIPT_URL, above) */}
+        <script src={SCRIPT_URL} />
       </head>
       {/* The running head is the same on every page, so it is rendered here,
           above each page's <article>, rather than by each page. */}
