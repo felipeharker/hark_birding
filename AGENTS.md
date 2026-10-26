@@ -27,7 +27,12 @@ decision log and the roadmap for all four live in
    from https://felipeharker.org/standards/hark.css and git ignores. Never
    edit or commit that copy; a change to a shared component is a change to
    the standard, in `hark_web`. This app's own rules go in
-   `styles_primary.css` and `styles_map.css`, commented.
+   `styles_primary.css` and `styles_map.css`, commented. The standard's one
+   script, https://felipeharker.org/standards/hark.js, is linked by
+   `src/app/layout.tsx` in the `<head>`, not deferred: it sets the page in
+   the design — sans or serif — the reader chose on felipeharker.org's front
+   page. There is no switch here; the front page is the only place to
+   choose.
 6. **Links.** Within the app: Next `<Link>`. To another site in the family:
    a plain `<a>` with the absolute address from `SITE_FAMILY` /
    `STANDARDS_URL`, same tab. To anyone else: spread `externalLinkProps(href)`
