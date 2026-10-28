@@ -1,0 +1,27 @@
+# Builds and checks the report on every push and pull request: the same
+# build Render runs, the lint, then tools/check.mjs against web/out. Render
+# deploys a push to main only once this passes (Auto-Deploy: After CI Checks
+# Pass).
+name: Check
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+      - run: npm ci
+        working-directory: web
+      - run: npm run build
+        working-directory: web
+      - run: npm run lint
+        working-directory: web
+      - run: node tools/check.mjs

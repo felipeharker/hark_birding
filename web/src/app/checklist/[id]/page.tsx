@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { getObservations, getMedia } from '@/lib/parseEbird';
 import { formatDate } from '@/lib/formatDate';
 import { SITE_TITLE } from '@/lib/siteConfig';
+import { shareMetadata } from '@/lib/shareMetadata';
 import ChecklistDocument from '@/components/ChecklistDocument';
 import { Masthead } from '@/components/ui/Masthead';
 import { Colophon } from '@/components/ui/Colophon';
@@ -28,10 +29,9 @@ export async function generateMetadata({
   }
 
   const meta = checklistData[0];
-  return {
-    title: `${formatDate(meta.Date)} · ${meta.Location} | ${SITE_TITLE}`,
-    description: `${checklistData.length} species recorded at ${meta.Location} on ${formatDate(meta.Date)}.`,
-  };
+  const title = `${formatDate(meta.Date)} · ${meta.Location} | ${SITE_TITLE}`;
+  const description = `${checklistData.length} species recorded at ${meta.Location} on ${formatDate(meta.Date)}.`;
+  return { title, description, ...shareMetadata(title, description, `/checklist/${submissionId}`) };
 }
 
 export default async function ChecklistPage({ params }: { params: Promise<{ id: string }> }) {

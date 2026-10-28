@@ -97,6 +97,7 @@ the filename.
 web/
   field-notes/           Markdown trip reports, one file per note
   scripts/standard.mjs   fetches the shared stylesheet before dev, build and lint
+  public/assets/og.jpg   the share card, copied to out/ as it is
   src/app/
     hark.css               the shared standard — generated, git-ignored
     styles_primary.css     this site's own components, commented throughout
@@ -104,14 +105,24 @@ web/
     layout.tsx             fonts, metadata and the running head
     page.tsx               reads every content source, hands it to HomeDocument
     checklist/[id]/        one static page per submitted checklist
+    sitemap.ts             out/sitemap.xml: the report and every checklist page
+    robots.ts              out/robots.txt: allow all, and where the sitemap is
   src/components/        HomeDocument, ChecklistDocument, Map, ImageLightbox
     ui/                    shared primitives: Runhead, Section, Masthead, Colophon, MediaGrid, Icons
   src/lib/
     parseEbird.ts          reads both eBird CSVs (server only — it touches the filesystem)
     parseFieldNotes.ts     reads field-notes/*.md
-    siteConfig.ts          title, abstract, off-site links, the rest of the family
+    siteConfig.ts          title, abstract, off-site links, the rest of the family, the site's address
+    shareMetadata.ts       a page's canonical address and share card (Open Graph, Twitter)
     formatDate.ts          eBird's two date formats → one display format
 ```
+
+Every page's `<head>` carries its canonical address and the card a link to
+it shows when it is shared, every address absolute on `SITE_URL`
+(`metadataBase` in `layout.tsx`). The card's image is the same on every
+page: `public/assets/og.jpg`, plain type — the masthead's kicker, title and
+subtitle on white, 1200 x 630 — because the photographs are the Macaulay
+Library's, linked and never copied.
 
 ## Design
 
@@ -146,6 +157,6 @@ build command `cd web && npm ci && npm run build`, publish directory
 [`render.yaml`](render.yaml).
 
 Its address is birds.felipeharker.org, the service's custom domain: a
-Porkbun CNAME to hark-birding.onrender.com, which still answers but is
-linked from nowhere. The old address, felipeharker.org/birds/, redirects
+Porkbun CNAME to hark-birding.onrender.com, an address Render no longer
+serves (Render Subdomain: Disabled), so the site has one address. The old address, felipeharker.org/birds/, redirects
 here, path and all, from `hark-site`, the portfolio's Render service.

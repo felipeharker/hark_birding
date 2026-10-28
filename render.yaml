@@ -10,6 +10,8 @@ services:
     runtime: static
     repo: https://github.com/felipeharker/hark_birding
     branch: main
+    autoDeployTrigger: checksPass          # deploys a push once its Check workflow passes
+    renderSubdomainPolicy: disabled        # served only at its custom domain, not onrender.com
     buildCommand: cd web && npm ci && npm run build   # prebuild fetches the shared stylesheet
     staticPublishPath: web/out
     domains:
