@@ -1,6 +1,6 @@
 # Notes for coding agents
 
-The birding report, https://hark-birding.onrender.com/. Read the repository's
+The birding report, https://birds.felipeharker.org/. Read the repository's
 [`AGENTS.md`](../AGENTS.md) first; these are the rules particular to this
 app.
 
