@@ -21,6 +21,21 @@ export const SITE_AUTHOR = 'Felipe Harker';
 /** Used for the page description in metadata. */
 export const SITE_DESCRIPTION = 'Personal birding project visualizing eBird observation data.';
 
+/**
+ * The site's own address. The metadata, the sitemap and robots.txt make
+ * every address in them absolute on it, as the share card's protocol and
+ * search engines need.
+ */
+export const SITE_URL = 'https://birds.felipeharker.org';
+
+/**
+ * The image a shared link to any page shows: plain type, the masthead's
+ * kicker, title and subtitle on white, 1200 x 630, from public/assets/og.jpg.
+ * Not a photograph: the report's are the Macaulay Library's, linked rather
+ * than copied.
+ */
+export const SHARE_IMAGE = { url: '/assets/og.jpg', width: 1200, height: 630 };
+
 /** The summary paragraph on the homepage, below the masthead. */
 export const ABSTRACT =
   'This project catalogs and shares birding observations from around the world, ' +

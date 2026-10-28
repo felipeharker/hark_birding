@@ -1,6 +1,12 @@
+import type { Metadata } from 'next';
 import { getObservations, getMedia } from '@/lib/parseEbird';
 import { getFieldNotes } from '@/lib/parseFieldNotes';
+import { SITE_DESCRIPTION, SITE_TITLE } from '@/lib/siteConfig';
+import { shareMetadata } from '@/lib/shareMetadata';
 import HomeDocument from '@/components/HomeDocument';
+
+/** The report's canonical address and its share card. */
+export const metadata: Metadata = shareMetadata(SITE_TITLE, SITE_DESCRIPTION, '/');
 
 /**
  * Reads every content source at build time and hands it to HomeDocument:

@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
-import { SITE_TITLE, SITE_DESCRIPTION } from '@/lib/siteConfig';
+import { SITE_TITLE, SITE_DESCRIPTION, SITE_URL } from '@/lib/siteConfig';
+import { shareMetadata } from '@/lib/shareMetadata';
 import { Runhead } from '@/components/ui/Runhead';
 
 // The shared standard first — hark.css is generated: `npm run dev` and
@@ -33,11 +34,16 @@ const FONTS_URL =
  */
 const SCRIPT_URL = 'https://felipeharker.org/standards/hark.js';
 
+/**
+ * Every page's defaults: the title, the description and the share card,
+ * with metadataBase making each address in them absolute. A page with an
+ * address of its own adds its canonical link and og:url (src/lib/shareMetadata.ts).
+ */
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: SITE_TITLE,
   description: SITE_DESCRIPTION,
-  openGraph: { title: SITE_TITLE, description: SITE_DESCRIPTION, type: 'website' },
-  twitter: { card: 'summary', title: SITE_TITLE, description: SITE_DESCRIPTION },
+  ...shareMetadata(SITE_TITLE, SITE_DESCRIPTION),
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
