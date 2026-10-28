@@ -4,10 +4,12 @@
  *
  *   SITE       this repository's site: its address, and the folder Render
  *              publishes
- *   FAMILY     every site in felipeharker.org's family, in the order of the
- *              site links at the foot of every page. The same list is in every
- *              hark_ repository (hark_web's is tools/sites.mjs); change it in
- *              all of them at once.
+ *   NAV        the running head and the site links at the foot of every
+ *              page: Portfolio, then the pages of this site's section of
+ *              the portfolio's running head (Birding), in order;
+ *              this site's own is "/" and bracketed. Every section's are
+ *              in hark_web's web/standards/docs/components.md, "Running
+ *              head".
  *   STYLESHEET the one shared stylesheet, served by hark_web. Every page links
  *              it by this address; nothing copies it.
  *   SCRIPT     the one shared script, served by hark_web beside the stylesheet.
@@ -20,11 +22,10 @@ import { join, normalize } from 'node:path';
 
 export const SITE = { name: 'Birding', url: 'https://birds.felipeharker.org/', dir: 'web/out', kind: 'next' };
 
-export const FAMILY = [
-  { name: 'Portfolio', url: 'https://felipeharker.org/', repo: 'hark_web' },
-  { name: 'Academic', url: 'https://academic.felipeharker.org/', repo: 'hark_academic' },
-  { name: 'Birding', url: 'https://birds.felipeharker.org/', repo: 'hark_birding' },
-  { name: 'Resume', url: 'https://resume.felipeharker.org/', repo: 'hark_resume' },
+export const NAV = [
+  { name: 'Portfolio', url: 'https://felipeharker.org/' },
+  { name: 'Ornithology Report', url: SITE.url },
+  { name: 'Dove Habitat', url: 'https://dove.felipeharker.org/' },
 ];
 
 export const STYLESHEET = 'https://felipeharker.org/standards/hark.css';

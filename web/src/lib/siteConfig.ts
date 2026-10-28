@@ -45,9 +45,9 @@ export const ABSTRACT =
 
 /**
  * Off-site addresses used in more than one place — the repository URL alone
- * appears in the reference list and the colophon. The Dove Habitat site, a
- * project site with its own tile on the portfolio, is linked from the
- * reference list and nowhere else here.
+ * appears in the reference list and the colophon. The Dove Habitat site, the
+ * other project in the portfolio's Birding section, is linked from the
+ * reference list and from SITE_NAV.
  */
 export const SITE_LINKS = {
   repository: 'https://github.com/felipeharker/hark_birding',
@@ -59,17 +59,17 @@ export const SITE_LINKS = {
 } as const;
 
 /**
- * Every site in felipeharker.org's family, in the order of FAMILY in
- * tools/site.mjs, for the running head at the top of each page (Runhead) and
- * the site links at its foot (Colophon). This report is the root of its own
- * site, so its own link is `/`; the others are absolute, written as plain
- * <a> elements, and open in the same tab. `current` marks this one.
+ * The running head at the top of every page (Runhead) and the site links at
+ * its foot (Colophon): Portfolio, then the pages of the portfolio's Birding
+ * section, in the order of NAV in tools/site.mjs. Every page carries the
+ * same links, a checklist as much as the front page. This report is the root
+ * of its own site, so its own link is `/`; the others are absolute, written
+ * as plain <a> elements, and open in the same tab. `current` marks this one.
  */
-export const SITE_FAMILY = [
+export const SITE_NAV = [
   { name: 'Portfolio', url: 'https://felipeharker.org/' },
-  { name: 'Academic', url: 'https://academic.felipeharker.org/' },
-  { name: 'Birding', url: '/', current: true },
-  { name: 'Resume', url: 'https://resume.felipeharker.org/' },
+  { name: 'Ornithology Report', url: '/', current: true },
+  { name: 'Dove Habitat', url: 'https://dove.felipeharker.org/' },
 ] as const;
 
 /** The name that leads the site links. */
@@ -85,9 +85,9 @@ export const SITE_ROOT = 'https://felipeharker.org/';
 /** The design standard every site in the family follows, served by hark_web. */
 export const STANDARDS_URL = 'https://felipeharker.org/standards/';
 
-/** The sites a link opens in the same tab from: the rest of the family. */
+/** The sites a link opens in the same tab from: the rest of the family, Dove Habitat among them. */
 const FAMILY_ORIGINS = new Set(
-  [...SITE_FAMILY.map((site) => site.url), SITE_ROOT, STANDARDS_URL]
+  [...SITE_NAV.map((site) => site.url), SITE_ROOT, STANDARDS_URL]
     .filter((url) => url.startsWith('http'))
     .map((url) => new URL(url).origin),
 );

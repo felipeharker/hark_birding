@@ -66,10 +66,6 @@ export default async function ChecklistPage({ params }: { params: Promise<{ id: 
 
   return (
     <article className="doc">
-      <Link href={`/?locationId=${meta.LocationID}`} className="backlink">
-        ← Back to the location index
-      </Link>
-
       <Masthead
         record
         kicker="Checklist Report"

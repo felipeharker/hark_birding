@@ -31,7 +31,7 @@ One of four sites built to the same standard, each in its own repository:
   of the repository: the notes are personal, the guides third-party.
 - **`tools/`** — `check.mjs` checks the built pages against the standard;
   `serve.mjs` serves the build as Render will; `site.mjs` holds this site's
-  address and the family's.
+  address and its running head's links.
 
 [`user_guide.md`](user_guide.md) is the non-developer's guide to editing every
 part of the site; [`web/AGENTS.md`](web/AGENTS.md) is the working brief for
@@ -44,7 +44,7 @@ coding agents, after [`AGENTS.md`](AGENTS.md).
 | `observation-data/ebird-data-latest.csv` | Map pins, the location index, species tables, and one page per checklist. |
 | `observation-data/ebird-media-latest.csv` | The Media section and the photo lightboxes. |
 | `web/field-notes/field-note-*.md` | The Field Notes section. |
-| `web/src/lib/siteConfig.ts` | Site title, subtitle, byline, the abstract, the off-site links (the Dove Habitat site among them), and the links to the rest of the family. |
+| `web/src/lib/siteConfig.ts` | Site title, subtitle, byline, the abstract, the off-site links (the Dove Habitat site among them), and the running head's links (`SITE_NAV`). |
 
 Observations are never written into markup — a change to a bird, a place or a
 count is a change to a CSV. The project's own settings are the exception, and
@@ -112,7 +112,7 @@ web/
   src/lib/
     parseEbird.ts          reads both eBird CSVs (server only — it touches the filesystem)
     parseFieldNotes.ts     reads field-notes/*.md
-    siteConfig.ts          title, abstract, off-site links, the rest of the family, the site's address
+    siteConfig.ts          title, abstract, off-site links, the running head's links, the site's address
     shareMetadata.ts       a page's canonical address and share card (Open Graph, Twitter)
     formatDate.ts          eBird's two date formats → one display format
 ```

@@ -39,7 +39,9 @@ decision log and the roadmap for all four live in
    from `siteConfig.ts`, which opens a new tab with
    `rel="noopener noreferrer"`.
 7. **Text.** Plain language; headings in Title Case, never numbered. Every
-   page ends with `<Colophon>` and its site links.
+   page opens with `<Runhead>` and ends with `<Colophon>`, both
+   Portfolio · Ornithology Report · Dove Habitat (`SITE_NAV`), with no back
+   link.
 8. **Third-party material** — field guides, papers — never goes in the
    repository; it stays in `notebook/`.
 9. **Keep the docs true.** A change to how something works updates the
