@@ -16,7 +16,7 @@ editing content and styling, not for developing features.
   every common component), `web/src/app/styles_primary.css` (this site's own
   components) and `web/src/app/styles_map.css` (the map). `hark.css` is a
   generated copy of the standard, which lives in `hark_web` — see §4.
-- **Where it is served:** https://hark-birding.onrender.com/, at the root of
+- **Where it is served:** https://birds.felipeharker.org/, at the root of
   its own site.
 - **Content:** eBird CSV exports, plus a Markdown file per field note.
 - **Settings:** `web/src/lib/siteConfig.ts` — the site title, subtitle, byline,
@@ -298,5 +298,5 @@ component. The Reference section links to it.
 
 This report is its own Render static site, `hark-birding`. Push to `main`:
 Render runs `cd web && npm ci && npm run build` and publishes `web/out/`
-at https://hark-birding.onrender.com/. New commits — including new CSV
+at https://birds.felipeharker.org/. New commits — including new CSV
 data — trigger a rebuild automatically. See the README's Deploying section.

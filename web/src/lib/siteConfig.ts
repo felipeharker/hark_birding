@@ -40,7 +40,7 @@ export const SITE_LINKS = {
   macaulayLibrary:
     'https://media.ebird.org/catalog?unconfirmed=incl&mediaType=photo&userId=USER8148095',
   merlin: 'https://merlin.allaboutbirds.org/',
-  doveHabitat: 'https://hark-dove-habitat.onrender.com/',
+  doveHabitat: 'https://dove.felipeharker.org/',
 } as const;
 
 /**
@@ -52,9 +52,9 @@ export const SITE_LINKS = {
  */
 export const SITE_FAMILY = [
   { name: 'Portfolio', url: 'https://felipeharker.org/' },
-  { name: 'Academic', url: 'https://hark-academic.onrender.com/' },
+  { name: 'Academic', url: 'https://academic.felipeharker.org/' },
   { name: 'Birding', url: '/', current: true },
-  { name: 'Resume', url: 'https://hark-resume.onrender.com/' },
+  { name: 'Resume', url: 'https://resume.felipeharker.org/' },
 ] as const;
 
 /** The name that leads the site links. */

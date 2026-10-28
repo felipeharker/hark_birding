@@ -1,6 +1,6 @@
 # hark_birding — agent guide
 
-The birding report, https://hark-birding.onrender.com/. Read
+The birding report, https://birds.felipeharker.org/. Read
 [`README.md`](README.md) first, then [`web/AGENTS.md`](web/AGENTS.md) for the
 app. It is one of four sites built to one standard; the standard, the
 decision log and the roadmap for all four live in

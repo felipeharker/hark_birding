@@ -12,6 +12,8 @@ services:
     branch: main
     buildCommand: cd web && npm ci && npm run build   # prebuild fetches the shared stylesheet
     staticPublishPath: web/out
+    domains:
+      - birds.felipeharker.org             # a Porkbun CNAME to its onrender.com address
     envVars:
       - key: NODE_VERSION                  # Next.js 16 needs 20.9 or newer
         value: "22"

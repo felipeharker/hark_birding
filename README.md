@@ -1,7 +1,7 @@
 # hark_birding
 
 The Harker Ornithology Report, served at
-**https://hark-birding.onrender.com/**: a personal birding project built on
+**https://birds.felipeharker.org/**: a personal birding project built on
 Cornell Lab tools and services (eBird, Macaulay Library, Merlin Bird ID). A
 Next.js app turns exported eBird data into a browsable report — map, location
 index, checklists, media and written field notes. Linked from the portfolio,
@@ -12,9 +12,9 @@ One of four sites built to the same standard, each in its own repository:
 | Site | Address | Repository |
 |---|---|---|
 | Portfolio, and the standards | https://felipeharker.org/ | [`hark_web`](https://github.com/felipeharker/hark_web) |
-| Academic | https://hark-academic.onrender.com/ | [`hark_academic`](https://github.com/felipeharker/hark_academic) |
-| Birding | https://hark-birding.onrender.com/ | `hark_birding`, this one |
-| Resume | https://hark-resume.onrender.com/ | [`hark_resume`](https://github.com/felipeharker/hark_resume) |
+| Academic | https://academic.felipeharker.org/ | [`hark_academic`](https://github.com/felipeharker/hark_academic) |
+| Birding | https://birds.felipeharker.org/ | `hark_birding`, this one |
+| Resume | https://resume.felipeharker.org/ | [`hark_resume`](https://github.com/felipeharker/hark_resume) |
 
 ## Layout
 
@@ -145,7 +145,7 @@ build command `cd web && npm ci && npm run build`, publish directory
 `web/out`, `NODE_VERSION=22`. The settings are recorded in
 [`render.yaml`](render.yaml).
 
-The old addresses redirect here, path and all: felipeharker.org/birds/ from
-`hark-site`, the portfolio's Render service, and birds.felipeharker.org from
-`hark-birding-redirect`, the report's first Render service, kept only for
-that.
+Its address is birds.felipeharker.org, the service's custom domain: a
+Porkbun CNAME to hark-birding.onrender.com, which still answers but is
+linked from nowhere. The old address, felipeharker.org/birds/, redirects
+here, path and all, from `hark-site`, the portfolio's Render service.
